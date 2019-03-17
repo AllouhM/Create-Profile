@@ -23,8 +23,7 @@ validateInput = () => {
     jumbotron.style.display = "block"
 
   })
-  // nameInput.value = "";
-  // ageInput.value = "";
+
   const hobbiesCount = document.getElementById("hobbies-num")
   hobbiesCount.textContent = (`Your hobbies`);
   localStorage.clear()

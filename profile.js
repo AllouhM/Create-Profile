@@ -15,13 +15,9 @@ if (localStorage.getItem("avatar")) {
   img.src = "https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg"
 }
 
-
 const nameDiv = createAppendElement("div", getContainer, { id: "nameDiv" })
 const nameValue = localStorage.getItem("name")
 nameDiv.textContent = `Name: ${nameValue}`
-
-
-
 
 const ageDiv = createAppendElement("div", getContainer, { id: "ageDiv" })
 const ageValue = localStorage.getItem("age")
