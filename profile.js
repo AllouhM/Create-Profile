@@ -1,5 +1,22 @@
 const getContainer = document.getElementById("details-container")
 
+function createAppendElement(name, parent, options = {}) {
+  const htmlElem = document.createElement(name);
+  parent.appendChild(htmlElem);
+  Object.keys(options).forEach(key => {
+    const value = options[key];
+    if (key === 'html') {
+      htmlElem.innerHTML = value;
+    } else {
+      htmlElem.setAttribute(key, value);
+    }
+  });
+  return htmlElem;
+}
+
+const maleValue = localStorage.getItem("male")
+const femaleValue = localStorage.getItem("female")
+const otherValue = localStorage.getItem("other")
 const imageDiv = createAppendElement("div", getContainer, { id: "imageDiv" });
 const img = createAppendElement("img", imageDiv, { id: "image", alt: "profile", width: "200px", height: "200px" })
 // const img = new Image()
@@ -12,7 +29,11 @@ imageDiv.appendChild(img);
 if (localStorage.getItem("avatar")) {
   img.setAttribute("src", localStorage.getItem("avatar"));
 } else {
-  img.src = "https://upload.wikimedia.org/wikipedia/commons/1/1e/Default-avatar.jpg"
+  if (femaleValue) { img.src = "images/female avatar.png" }
+  else if (maleValue) { img.src = "images/male avatar.png" }
+  else {
+    img.src = "images/other avatar.png"
+  }
 }
 
 const nameDiv = createAppendElement("div", getContainer, { id: "nameDiv" })
@@ -23,9 +44,7 @@ const ageDiv = createAppendElement("div", getContainer, { id: "ageDiv" })
 const ageValue = localStorage.getItem("age")
 ageDiv.textContent = `Age: ${ageValue}`;
 
-const maleValue = localStorage.getItem("male")
-const femaleValue = localStorage.getItem("female")
-const otherValue = localStorage.getItem("other")
+
 
 if (maleValue) {
   const maleDiv = createAppendElement("div", getContainer, { class: "genderOpt" })
@@ -39,7 +58,6 @@ if (maleValue) {
 }
 
 let hobbiesValue = localStorage.getItem("hobbies");
-console.log(hobbiesValue.length);
 const hobbiesList = createAppendElement("ul", getContainer, { id: "hobbiesList" })
 hobbiesList.innerHTML = "Hobbies"
 if (!hobbiesValue.length) {
@@ -61,17 +79,3 @@ backBtn.onclick = () => {
   location.href = "file:///C:/Users/Mahmoud/Desktop/create-profile/createuser.html"
 }
 
-function createAppendElement(name, parent, options = {}) {
-  const htmlElem = document.createElement(name);
-  parent.appendChild(htmlElem);
-  Object.keys(options).forEach(key => {
-    const value = options[key];
-    if (key === 'html') {
-      htmlElem.innerHTML = value;
-    } else {
-      htmlElem.setAttribute(key, value);
-    }
-  });
-
-  return htmlElem;
-}
